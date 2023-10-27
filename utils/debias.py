@@ -105,7 +105,7 @@ def debias(output):
     return output
 
 def config_debias(output,data_type):   
-    if data_type in ['cnn-dm']:
+    if data_type in ['mmlu', 'truthfulqa', 'bbq','gsm8k']:
         return output
     # if output[0] in ["A", "B", "C", "D", "E", "F"]:
     #     if len(output) == 1 or output[1] in ["."] and len(output) <= 5:
