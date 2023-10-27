@@ -13,7 +13,7 @@ RUN git clone https://lu-vae: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@huggingface.c
 RUN git clone https://lu-vae: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@huggingface.co/lu-vae/qwen-bbq2 lu-vae/qwen-bbq-merged
 RUN git clone https://lu-vae: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@huggingface.co/lu-vae/qwen-chat1 lu-vae/qwen-chat-merged
 RUN git clone https://lu-vae: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@huggingface.co/lu-vae/qwen-gsm8k-merged lu-vae/qwen-gsm8k-merged
-# RUN git clone https://huggingface.co/Qwen/Qwen-14B Qwen/Qwen-14B
+RUN git clone https://huggingface.co/Qwen/Qwen-14B Qwen/Qwen-14B
 COPY utils utils
 COPY qwen_moe_chat.py main.py
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
