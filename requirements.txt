@@ -1,0 +1,13 @@
+auto-gptq==0.4.2
+accelerate>=0.23.0
+torch>=2.0.0
+bitsandbytes==0.41.1
+flash-attn==2.2.2
+huggingface-hub==0.17.1
+transformers>=4.34.0
+optimum==1.13.1
+tokenizers>=0.13.3
+scipy
+transformers_stream_generator
+tiktoken
+nltk

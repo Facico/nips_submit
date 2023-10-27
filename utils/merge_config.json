@@ -1,0 +1,16 @@
+{
+    "mmlu":{
+        "/home/lzy/axolotl/src/outs/qwen-bbq-neft": 1
+    },
+    "truthfulqa":{
+        "/home/lzy/axolotl/src/outs/qwen-filter-load_bigbench-load_truthfulqa-threshold_3.0_16.128677": 0.7,
+        "/home/lzy/axolotl/src/outs/qwen-filter-load_bigbench-load_bbq-threshold_3.0_61.914473_6589": 0.8
+    },
+    "bbq":{
+        "/home/lzy/axolotl/src/outs/qwen-filter-load_bigbench-load_mmlu-threshold_4.0_98.874156": 1.1,
+        "/home/lzy/axolotl/src/outs/qwen-bbq": 0.0
+    },
+    "cnn":{
+        "/home/lzy/axolotl/src/outs/qwen-filter-load_cnn_dm-load_cnn_dm-t8.0_494.33520505538934_1255": 1
+    }
+}
