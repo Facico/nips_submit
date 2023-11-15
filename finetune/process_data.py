@@ -1,6 +1,5 @@
 import datasets
 import json
-import utils
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq

@@ -49,8 +49,8 @@ mv outs/qwen-cnn_900 outs/qwen-cnn-merged
 mv outs/qwen-gsm8k_7473 outs/qwen-gsm8k-merged
 mv outs/qwen-mmlu_1129 outs/qwen-mmlu-merged
 
-# 4. upload the model to huggingface to run the inference code (Dockerfile1)
-for domain in qwen-mmlu-merged qwen-cnn-merged qwen-gsm8k-merged qwen-chat2 qwen-bbq-merged qwen-truthfulqa-merged ; do
-    huggingface-cli upload --private lu-vae/"$domain"1 outs/$domain/adapter_config.json adapter_config.json
-    huggingface-cli upload --private lu-vae/"$domain"1 outs/$domain/adapter_model.bin adapter_model.bin
-done
+# 4. You may upload the model to huggingface to run the inference code (Dockerfile1) 
+# for domain in qwen-mmlu-merged qwen-cnn-merged qwen-gsm8k-merged qwen-chat2 qwen-bbq-merged qwen-truthfulqa-merged ; do
+#     huggingface-cli upload --private lu-vae/"$domain"1 outs/$domain/adapter_config.json adapter_config.json
+#     huggingface-cli upload --private lu-vae/"$domain"1 outs/$domain/adapter_model.bin adapter_model.bin
+# done
