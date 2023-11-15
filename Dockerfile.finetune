@@ -1,6 +1,6 @@
 FROM thebloke/ubuntu2204-cuda118-pytorch2
 ENV PIP_DEFAULT_TIMEOUT=10000 
-COPY ./requirements.txt requirements.txt
+COPY ./requirements-train.txt requirements-train.txt
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y openssh-client git curl && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && apt-get install -y git-lfs
 RUN pip install --no-cache-dir -r requirements-train.txt
 WORKDIR /workspace
