@@ -187,6 +187,21 @@ async def process_request(input_data: ProcessRequest) -> ProcessResponse:
     else:
         output = tokenizer.decode(outputs.sequences[0], skip_special_tokens=True)
     
+    if len(output.strip()) == 0:
+        with torch.no_grad():
+            outputs = model.generate(
+                **encoded,
+                max_new_tokens=input_data.max_new_tokens,
+                do_sample=True,
+                temperature=input_data.temperature,
+                top_k=input_data.top_k,
+                return_dict_in_generate=True,
+                output_scores=True,
+                pad_token_id=0,
+                repetition_penalty=0.6,
+            )
+        output = tokenizer.decode(outputs.sequences[0][prompt_length:], skip_special_tokens=True)
+    
     if data_type == 'raw':
         output = dedup(output)
     elif 'MATH' == data_type:
