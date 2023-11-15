@@ -3,3 +3,6 @@ Qwen
 blobs
 scripts
 lu-vae
+outs
+last_run_prepared
+*.log

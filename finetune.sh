@@ -1,16 +1,23 @@
 # the finetune code for submission 1
 
-source activate lla
+: ${CUDA_VISIBLE_DEVICES:=0}
+export CUDA_VISIBLE_DEVICES
+
 
 # 1. download opensource dataset
 cd finetune
 export PYTHONPATH=.
+echo ">>> processing data"
 
 dir=data
+if [ ! -d "$dir" ]; then
 git clone https://huggingface.co/datasets/Facico/test $dir
 python process_data.py --number 1
+fi
+ls $dir
 
 # 2. finetuning with lora
+echo ">>> start training"
 yaml_file="qwen.yml"
 for file in "$dir"/*; do
     echo $file
@@ -25,7 +32,6 @@ for file in "$dir"/*; do
         echo "use $file, output in $name" 
 
         WANDB_NAME=qwen-$name \
-        CUDA_VISIBLE_DEVICES=0 \
         accelerate launch -m axolotl.cli.train $yaml_file \
         --datasets $file \
         --output_dir ../outs/qwen-$name \
@@ -41,9 +47,10 @@ for file in "$dir"/*; do
 done
 
 # 3. merge some loras (use the parent dir code)
+echo ">>> merge lora"
 cd ..
 export PYTHONPATH=.
-CUDA_VISIBLE_DEVICES=0 python utils/peft_save_merge.py
+python utils/peft_save_merge.py
 mv outs/qwen-chat_1810 outs/qwen-chat2
 mv outs/qwen-cnn_900 outs/qwen-cnn-merged
 mv outs/qwen-gsm8k_7473 outs/qwen-gsm8k-merged

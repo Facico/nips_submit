@@ -11,7 +11,7 @@ addict
 fire
 PyYAML>=6.0
 datasets
-flash-attn>=2.3.0
+flash-attn==2.2.2
 sentencepiece
 wandb
 einops
@@ -30,10 +30,8 @@ scikit-learn==1.2.2
 pynvml
 art
 fschat==0.2.29
-auto-gptq==0.4.2
 huggingface-hub==0.17.1
 tokenizers>=0.13.3
-scipy
 transformers_stream_generator
 tiktoken
 nltk

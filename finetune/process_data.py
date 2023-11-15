@@ -3,8 +3,14 @@ import json
 import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
+import argparse
 
-parquet_file = 'data/final_data.1.parquet' #'./test2/final_data.2.parquet' #'./test3/final_data.3.parquet'
+parser = argparse.ArgumentParser(add_help=False)
+parser.add_argument("--number", type=int, default=1)
+args = parser.parse_args()
+
+test_file = ["", "data", "data2", "data3"]
+parquet_file = f'{test_file[args.number]}/final_data.{args.number}.parquet' #'./test2/final_data.2.parquet' #'./test3/final_data.3.parquet'
 table = pq.read_table(parquet_file)
 df = table.to_pandas()
 df.to_json('final_data.json', orient='records', lines=True, force_ascii=False)
@@ -27,12 +33,11 @@ with open("final_data.json", "r") as f:
         final_data[data_idx[now][0]][-1].append(i)
 
 for k in final_data.keys():
+    tot = 0
     for item in final_data[k]:
         print(k, len(item))
-"""     
-mmlu 57492
-truthfulqa 65479
-truthfulqa 72068
-bbq 97675
-cnn 98575
-"""
+        output_file = f'./{test_file[args.number]}/{k}_{len(item)}.json'
+        fr = open(output_file, "w")
+        for i in item:
+            fr.write(i)
+        fr.close()
