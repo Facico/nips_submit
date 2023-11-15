@@ -112,7 +112,7 @@ def get_data_type(prompt):
     if check_code(prompt) == True:
         return "code"
     if check_fewshot(prompt) == False:
-        return 'zs-chat'
+        return os.environ.get('FALLBACK')
     if '###\nArticle' in prompt and 'Summarize the above article in 3 sentences.' in prompt:
         return 'cnn-dm'
     if '###\nArticle' in prompt and 'Summarize the above article in 1 sentence.' in prompt:
@@ -144,7 +144,6 @@ def dedup(output):
         if len(prompt_line) == 1:
             prompt_line = output.split("\\n")
         mine_line = len(prompt_line)
-        # import pdb;pdb.set_trace()
         max_line = 0
         for k in prompt_num.keys():
             pattern_more = r"(.+?):"

@@ -40,6 +40,7 @@ with torch.no_grad():
         # merge 2 lora
         if len(merge_config[domain]) == 2:
             lora_paths = list(merge_config[domain].keys())
+            if lora_paths[-1] == '-': lora_paths[-1] = lora_paths[0]
             lora_weights = list(merge_config[domain].values())
             merged_name=f'qwen-{domain}-merged'
             model = lora_utils.add_multi_lora(
@@ -64,6 +65,6 @@ with torch.no_grad():
             print(f'active adatpters: {model.base_model.model.transformer.h[0].attn.c_attn.active_adapters}')
             print(f'disable adatpers: {model.base_model.model.transformer.h[0].attn.c_attn.disable_adapters}')
 
-            model.save_pretrained(f'lu-vae', selected_adapters=[merged_name])
+            model.save_pretrained(f'outs', selected_adapters=[merged_name])
             model.delete_adapter('l1')
             model.delete_adapter('l2')

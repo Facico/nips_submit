@@ -98,10 +98,12 @@ def config_gen(input_data, data_type):
         input_data.top_k=145
     elif "chat" in data_type:
         repetition_penalty = 2.0
+    elif "xsum" in data_type:
+        repetition_penalty = 0.8
     print('gen parameter: ',input_data.top_k,input_data.temperature,repetition_penalty)
     return input_data, repetition_penalty
 
-ACTIVE_LORA_NAME=None
+ACTIVE_LORA_NAME='cnn-dm'
 
 def config_moe(model, data_type):
     global ACTIVE_LORA_NAME
@@ -130,7 +132,7 @@ def config_moe(model, data_type):
             ACTIVE_LORA_NAME=data_type
             model.set_adapter('gsm8k')
             model.enable_adapter_layers() 
-    elif 'chat' in data_type or data_type == 'xsum' or data_type == 'commonsense':
+    elif 'chat' in data_type or data_type == 'commonsense':
         data_type = 'chat'
         if data_type != ACTIVE_LORA_NAME:
             ACTIVE_LORA_NAME=data_type
@@ -187,9 +189,11 @@ async def process_request(input_data: ProcessRequest) -> ProcessResponse:
     
     if data_type == 'raw':
         output = dedup(output)
+    elif 'MATH' == data_type:
+        output = output.split('###')[0]
     elif 'chat' in data_type:
         output = output.strip("<|endoftext|>").strip("</s>")
-    else:
+    elif 'cnn-dm' == data_type or 'xsum' == data_type:
         output = debias.config_debias(output, data_type)
 
     print(output)
