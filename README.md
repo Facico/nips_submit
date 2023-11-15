@@ -14,6 +14,12 @@ Total submit for 3 times:
 - Dockerfile2  for 1 time
 - Dockerfile3  for 1 time
 
+Or you can run the following command:
+```
+pip install -r requirements.txt
+uvicorn qwen_moe_raw:app --port 8000
+```
+
 ## finetune
 
 Use the [`Dockerfile.finetune`](Dockerfile.finetune) to finetune.
