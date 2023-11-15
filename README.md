@@ -22,7 +22,7 @@ uvicorn qwen_moe_raw:app --port 8000
 
 ## finetune
 
-Use the [`Dockerfile.finetune`](Dockerfile.finetune) to finetune.
+Use the [`Dockerfile.finetune`](Dockerfile.finetune) to reproduce the submission 1.
 
 Or you can run the following command:
 ```
